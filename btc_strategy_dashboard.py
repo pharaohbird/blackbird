@@ -24,7 +24,6 @@ st.markdown("""
 ### 📐 Mathematical Logic
 
 **Implied Volatility (IV)**:
-- 
 \[ \text{IV}_{14d} = \text{StdDev}(\log(\frac{P_t}{P_{t-1}})) \text{ over 14 days} \]
 
 **Volatility Context Filters**:
@@ -32,8 +31,8 @@ st.markdown("""
 \[ \text{IV Ratio} = \frac{IV_{14d} - \text{Median}_{60d}}{\text{IQR}_{60d}} \]
 
 **TP & TSL Adjustment**:
-\[ \text{TP}_{adj} = TP_{base} \times \left(1 + 0.2 \times \text{IV Ratio}\right) \quad \text{(Clipped between 2–8%)} \]
-\[ \text{TSL}_{adj} = 5\% \times \left(1 + 0.2 \times \text{IV Ratio}\right) \quad \text{(Clipped between 3–8%)} \]
+\[ \text{TP}_{adj} = TP_{base} \times (1 + 0.2 \times \text{IV Ratio}) \quad \text{(Clipped between 2\%–8\%)} \]
+\[ \text{TSL}_{adj} = 5\% \times (1 + 0.2 \times \text{IV Ratio}) \quad \text{(Clipped between 3\%–8\%)} \]
 
 **Capital Allocation**: One full allocation per trade (no overlap)
 """)
