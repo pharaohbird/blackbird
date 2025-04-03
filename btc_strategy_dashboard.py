@@ -78,6 +78,18 @@ Or live ATM IV from Deribit feed.
 st.sidebar.header("📡 Live Implied Volatility")
 if st.session_state.latest_iv is not None:
     st.sidebar.success(f"ATM IV: {st.session_state.latest_iv}%")
+
+    # Auto-scale thresholds based on IV
+    base_tp = 0.04  # assume 4% monthly average base
+    base_tsl = 0.05
+    iv_median = 45.0
+    iv_iqr = 10.0
+    iv_ratio = (st.session_state.latest_iv - iv_median) / iv_iqr
+    scaled_tp = min(max(base_tp * (1 + 0.2 * iv_ratio), 0.02), 0.08)
+    scaled_tsl = min(max(base_tsl * (1 + 0.2 * iv_ratio), 0.03), 0.08)
+
+    st.sidebar.markdown(f"**Auto-Scaled TP:** {scaled_tp*100:.2f}%")
+    st.sidebar.markdown(f"**Auto-Scaled TSL:** {scaled_tsl*100:.2f}%")
 else:
     st.sidebar.warning("Waiting for live IV data...")
 
